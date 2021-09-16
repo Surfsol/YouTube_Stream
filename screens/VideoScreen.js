@@ -1,12 +1,13 @@
 import React from 'react';
-import { Button, StyleSheet, View, Text } from 'react-native';
+import {Button, StyleSheet, View, Text} from 'react-native';
+import Menu from '../components/Menu';
 
-function VideoScreen({ navigation }) {
-    return (
+function VideoScreen({navigation}) {
+  return (
     <View>
-      <Text>Video Screen</Text>
+      <Menu />
     </View>
-    );
-  }
-  
-  export default VideoScreen
+  );
+}
+
+export default VideoScreen;
