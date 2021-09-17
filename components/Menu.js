@@ -1,47 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import { Alert, Button, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { getVideos } from '../services/getVideos';
-import { youtubeArray } from './temp';
+import React, {useEffect, useState} from 'react';
+import {
+  Alert,
+  StyleSheet,
+  View,
+} from 'react-native';
+import {getVideos} from '../services/getVideos';
+import {youtubeArray} from './temp';
 import MenuItem from './MenuItem';
+import PlayVideo from './PlayVideo';
 
-// https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=direct%20tv&key=AIzaSyDpcrJuY4lCNTkWu5WuWaaMQC4n72zRVcA
 
-function Menu({ navigation }) {
+
+
+function Menu({navigation}) {
   const [request, setRequest] = useState();
-  const [youtubeResponse, setYouTubeResponse] = useState(youtubeArray);
-  const [video, setVideo] = useState() 
+  const [youtubeResponse, setYouTubeResponse] = useState();
+  const [video, setVideo] = useState();
 
   useEffect(() => {
-    // getVideos().then((res) => {
-    //   if (res === 'error'){
-    //     Alert.alert(
-    //       "Something went wrong with your request.",
-    //       "Please try again.",
-    //       [{ cancelable: true }]
-    //     );
-    //   }
-    //   setYouTubeResponse(res.items);
-    // })
+    getVideos().then(res => {
+      if (res === 'error') {
+        Alert.alert(
+          'Something went wrong with your request.',
+          'Please try again.',
+          [{cancelable: true}],
+        );
+      }
+      setYouTubeResponse(res.items);
+    });
   }, [request]);
 
   useEffect(() => {
-    console.log({video})
-    
-  },[video])
- 
-//   if(video) {
-//     console.log('in if video', video)
+    console.log({video});
+  }, [video]);
 
-//   } 
+  const clearVideo = () => {
+    console.log('in clear video');
+    setVideo();
+  };
+
+  if (video) {
+    console.log('in if video', video);
+    return (
+      <View style={styles.container}>
+        <PlayVideo videoId={video} clearVideo={clearVideo} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.menu}>
-        <Text style={styles.title}> Menu </Text>
+        {/* <Text style={styles.title}> Menu </Text> */}
         {youtubeResponse &&
           youtubeResponse.map((item, index) => {
             return (
-           
               <MenuItem
                 key={index}
                 title={item.snippet.title}
@@ -49,12 +62,8 @@ function Menu({ navigation }) {
                 videoId={item.id.videoId}
                 setVideo={setVideo}
               />
-            
-           
-            )
-          })
-          
-          }
+            );
+          })}
       </View>
     </View>
   );
@@ -63,12 +72,11 @@ function Menu({ navigation }) {
 export default Menu;
 
 const styles = StyleSheet.create({
-  container: {
-    
-  },
+  container: {},
   menu: {
+    flex:1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     marginLeft: 20,
     marginRight: 20,
   },
@@ -76,9 +84,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
   },
-  item:{
-    height: 150,
-    width:200,
-    backgroundColor:'red',
-  }
 });

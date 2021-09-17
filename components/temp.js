@@ -176,6 +176,11 @@ const youtubeArray = [
       },
     },
   ];
+
+  //   'https://youtube.googleapis.com/youtube/v3/liveStreams?key=[YOUR_API_KEY]' \
+//   --header 'Authorization: Bearer [YOUR_ACCESS_TOKEN]' \
+//   --header 'Accept: application/json' \
+//   --compressed
   
   export { youtubeArray };
   
