@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   Image,
   SafeAreaView,
   View,
@@ -15,28 +16,26 @@ import PlayVideo from './PlayVideo';
 import {wp} from '../utils/dimensions';
 import {useDeviceOrientation} from '@react-native-community/hooks';
 
-
-const MenuParent = ({route,navigation}) => {
+const MenuParent = ({route, navigation}) => {
   const [youtubeResponse, setYouTubeResponse] = useState();
   const [video, setVideo] = useState();
   const {landscape} = useDeviceOrientation();
-  const { search } = route.params;
-console.log('on menu parent search', search)
-    useEffect(() => {
-      getVideos(search).then(res => {
-        if (res === 'error') {
-          Alert.alert(
-            'Something went wrong with your request.',
-            'Please try again.',
-            [{cancelable: true}],
-          );
-        }
-        setYouTubeResponse(res.items);
-      });
-    }, []);
+  const {adjustedSearch} = route.params;
+
+  useEffect(() => {
+    getVideos(adjustedSearch).then(res => {
+      if (res === 'error') {
+        Alert.alert(
+          'Something went wrong with your request.',
+          'Please try again.',
+          [{cancelable: true}],
+        );
+      }
+      setYouTubeResponse(res.items);
+    });
+  }, []);
 
   const clearVideo = () => {
-    console.log('in clear video');
     setVideo();
   };
 
@@ -50,20 +49,41 @@ console.log('on menu parent search', search)
             style={landscape ? styles.imageLand : styles.image}
             source={{uri: item.snippet.thumbnails.default.url}}
           />
-          <Text style={landscape ? styles.titleLand : styles.title}>{item.snippet.title}</Text>
+          <Text style={landscape ? styles.titleLand : styles.title}>
+            {item.snippet.title}
+          </Text>
         </TouchableOpacity>
       </>
     );
   };
 
-  if (video) {
-    console.log('in if video', video);
+  if (!youtubeResponse) {
     return (
-      <View style={styles.container}>
-        <PlayVideo videoId={video} clearVideo={clearVideo} navigation={navigation}/>
+      <View
+        style={{
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <ActivityIndicator size="large" color="white" />
       </View>
     );
-  } 
+  }
+
+  if (video) {
+    return (
+      <View style={styles.container}>
+        <PlayVideo
+          videoId={video}
+          clearVideo={clearVideo}
+          navigation={navigation}
+        />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={landscape ? styles.containerLand : styles.container}>
@@ -79,15 +99,15 @@ console.log('on menu parent search', search)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:  0,
+    marginTop: 0,
     alignItems: 'center',
     backgroundColor: '#fff',
   },
   containerLand: {
     flex: 1,
     flexDirection: 'column',
-     alignItems: 'center',
-     marginTop: StatusBar.currentHeight || 0,
+    alignItems: 'center',
+    marginTop: StatusBar.currentHeight || 0,
   },
   title: {
     fontSize: 32,
@@ -103,7 +123,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     width: wp(100),
-    padding: 20
+    padding: 20,
   },
   title: {
     color: 'black',

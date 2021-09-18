@@ -27,17 +27,11 @@ function Menu({navigation}) {
     });
   }, [request]);
 
-  useEffect(() => {
-    console.log({video});
-  }, [video]);
-
   const clearVideo = () => {
-    console.log('in clear video');
     setVideo();
   };
 
   if (video) {
-    console.log('in if video', video);
     return (
       <View style={styles.container}>
         <PlayVideo videoId={video} clearVideo={clearVideo} />
