@@ -24,7 +24,7 @@ function HomeScreen({navigation}) {
         placeholder="Search"
       />
       <Button
-        title="Videos"
+        title="Search"
         onPress={() =>
           navigation.navigate('Videos', {adjustedSearch: adjustedSearch})
         }
@@ -36,24 +36,14 @@ function HomeScreen({navigation}) {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: {flex: 1, alignItems: 'center', justifyContent: 'center'},
-  title: {marginBottom: 60, fontSize: 30},
-  button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginLeft: 17,
-    marginTop: 0,
-    marginRight: 20,
-    marginBottom: 5,
-    backgroundColor: '#FFFFFF',
-    height: 35,
-  },
+  container: {flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor:'#252324'},
+  title: {marginBottom: 60, fontSize: 30, color: '#FF0000', fontWeight: 'bold'},
   input: {
     height: 40,
     width: wp(60),
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    backgroundColor: 'white',
   },
 });

@@ -99,15 +99,18 @@ const MenuParent = ({route, navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 0,
+    justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 5,
+    marginBottom: 5,
     backgroundColor: '#fff',
   },
   containerLand: {
     flex: 1,
     flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop: 0,
   },
   title: {
     fontSize: 32,
@@ -117,6 +120,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     backgroundColor: 'white',
     marginBottom: 15,
+    width: wp(95),
   },
   itemLand: {
     flex: 1,
