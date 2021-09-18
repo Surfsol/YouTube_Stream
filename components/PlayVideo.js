@@ -1,22 +1,20 @@
 import React from 'react';
 import {Pressable, StyleSheet, Text} from 'react-native';
-import {
-  View,
-} from 'react-native';
+import {View} from 'react-native';
 import {WebView} from 'react-native-webview';
-import { wp } from '../utils/dimensions';
+import {wp} from '../utils/dimensions';
 import BackArrow from '../assets/BackArrow';
 
 const PlayVideo = ({videoId, clearVideo}) => {
   const uri = `https://www.youtube.com/watch?v=${videoId}`;
   return (
-    <View style={{flex: 1, width: wp(100)}}>
-      <Pressable style={styles.button} onPress={clearVideo}>
-        <BackArrow style={styles.arrow}/>
-         <Text style={styles.back}>Videos</Text>
+    <View style={styles.container}>
+      <Pressable style={styles.backButton} onPress={clearVideo}>
+        <BackArrow style={styles.arrow} />
+        <Text style={styles.back}>Videos</Text>
       </Pressable>
       <WebView
-        style={{marginTop: 0}}
+        style={styles.webView}
         javaScriptEnabled={true}
         domStorageEnabled={true}
         allowsFullscreenVideo={true}
@@ -29,21 +27,28 @@ const PlayVideo = ({videoId, clearVideo}) => {
 export default PlayVideo;
 
 const styles = StyleSheet.create({
-  back:{
+  container: {
+    flex: 1,
+    width: wp(100),
+  },
+  back: {
     color: '#000000',
     fontSize: 20,
-    marginLeft: 35, 
-    fontWeight: "500",
+    marginLeft: 35,
+    fontWeight: '500',
   },
-  button: {
+  backButton: {
     flexDirection: 'row',
-     alignItems: 'center',
-     justifyContent: 'flex-start',
-     marginLeft: 17,
-     marginTop: 0,
-     marginRight: 20,
-     marginBottom: 5,
-     backgroundColor: '#FFFFFF',
-   height: 35,
-   },
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginLeft: 17,
+    marginTop: 0,
+    marginRight: 20,
+    marginBottom: 5,
+    backgroundColor: '#FFFFFF',
+    height: 35,
+  },
+  webView: {
+    marginTop: 0,
+  },
 });

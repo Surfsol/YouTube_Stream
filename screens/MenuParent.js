@@ -8,11 +8,9 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  StatusBar,
 } from 'react-native';
 import {getVideos} from '../services/getVideos';
-import {youtubeArray} from './temp';
-import PlayVideo from './PlayVideo';
+import PlayVideo from '../components/PlayVideo';
 import {wp} from '../utils/dimensions';
 import {useDeviceOrientation} from '@react-native-community/hooks';
 
@@ -112,9 +110,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 0,
   },
-  title: {
-    fontSize: 32,
-  },
   item: {
     flex: 1,
     alignContent: 'center',
@@ -129,17 +124,6 @@ const styles = StyleSheet.create({
     width: wp(100),
     padding: 20,
   },
-  title: {
-    color: 'black',
-    width: wp(90),
-    paddingTop: 5,
-    paddingBottom: 10,
-    paddingLeft: 15,
-  },
-  titleLand: {
-    color: 'black',
-    width: wp(40),
-  },
   image: {
     height: 200,
     width: wp(100),
@@ -150,6 +134,17 @@ const styles = StyleSheet.create({
     width: wp(70),
     marginBottom: 10,
     marginRight: 15,
+  },
+  title: {
+    color: 'black',
+    width: wp(90),
+    paddingTop: 5,
+    paddingBottom: 10,
+    paddingLeft: 15,
+  },
+  titleLand: {
+    color: 'black',
+    width: wp(40),
   },
 });
 
