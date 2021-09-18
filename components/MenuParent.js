@@ -16,24 +16,23 @@ import {wp} from '../utils/dimensions';
 import {useDeviceOrientation} from '@react-native-community/hooks';
 
 
-const MenuParent = () => {
-  const [youtubeResponse, setYouTubeResponse] = useState(youtubeArray);
+const MenuParent = ({navigation}) => {
+  const [youtubeResponse, setYouTubeResponse] = useState();
   const [video, setVideo] = useState();
   const {landscape} = useDeviceOrientation();
-  console.log({landscape})
 
-  //   useEffect(() => {
-  //     getVideos().then(res => {
-  //       if (res === 'error') {
-  //         Alert.alert(
-  //           'Something went wrong with your request.',
-  //           'Please try again.',
-  //           [{cancelable: true}],
-  //         );
-  //       }
-  //       setYouTubeResponse(res.items);
-  //     });
-  //   }, [request]);
+    useEffect(() => {
+      getVideos().then(res => {
+        if (res === 'error') {
+          Alert.alert(
+            'Something went wrong with your request.',
+            'Please try again.',
+            [{cancelable: true}],
+          );
+        }
+        setYouTubeResponse(res.items);
+      });
+    }, []);
 
   const clearVideo = () => {
     console.log('in clear video');
@@ -41,7 +40,6 @@ const MenuParent = () => {
   };
 
   const renderItem = ({item}) => {
-    console.log(item.snippet.title);
     return (
       <>
         <TouchableOpacity
@@ -61,7 +59,7 @@ const MenuParent = () => {
     console.log('in if video', video);
     return (
       <View style={styles.container}>
-        <PlayVideo videoId={video} clearVideo={clearVideo} />
+        <PlayVideo videoId={video} clearVideo={clearVideo} navigation={navigation}/>
       </View>
     );
   } 

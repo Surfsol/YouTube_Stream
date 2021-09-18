@@ -1,51 +1,43 @@
 import React from 'react';
-import {NodePlayerView} from 'react-native-nodemediaclient';
-import {Pressable, StyleSheet, Text} from 'react-native'
-//import VideoPlayer from 'react-native-video-controls';
+import {Pressable, StyleSheet, Text} from 'react-native';
+import {
+  View,
+} from 'react-native';
+import {WebView} from 'react-native-webview';
+import { wp } from '../utils/dimensions';
 
-const PlayVideo = ({videoId, clearVideo}) => {
-  console.log({videoId});
-  const uri = `https://www.youtube.com/watch?v=${videoId}`
-  //https://www.youtube.com/watch?v=Z-Nwo-ypKtM
+const PlayVideo = ({videoId, clearVideo, navigation}) => {
+  const uri = `https://www.youtube.com/watch?v=${videoId}`;
   return (
-//     <VideoPlayer
-//   source={{uri: `https://www.youtube.com/watch?v=${videoId}`}}
-//   navigator={this.props.navigator}
-// />
-    // <ReactNativeVideo
-    //       resizeMode="contain"
-    //       onError={console.log}
-    //       style={styles.video}
-    //       paused={false}
-    //       source={{ uri }}
-    //       ignoreSilentSwitch="ignore"
-    //       repeat
-    //       controls
-    //     />
-    <>
-    <Pressable style={styles.button} onPress={clearVideo}><Text>Back</Text></Pressable>
-    <NodePlayerView
-      style={{height: 200}}
-      ref={vp => {
-        this.vp = vp;
-      }}
-      inputUrl={`https://www.youtube.com/watch?v=${videoId}`}
-      scaleMode={'ScaleAspectFit'}
-      bufferTime={300}
-      maxBufferTime={1000}
-      autoplay={true}
-    />
-    </>
+    <View style={{flex: 1, width: wp(100)}}>
+      <Pressable style={styles.button} onPress={clearVideo}>
+        <Text style={styles.back}>Menu</Text>
+      </Pressable>
+      <WebView
+        style={{marginTop: 0}}
+        javaScriptEnabled={true}
+        domStorageEnabled={true}
+        allowsFullscreenVideo={true}
+        source={{uri: uri}}
+      />
+    </View>
   );
 };
 
 export default PlayVideo;
 
 const styles = StyleSheet.create({
-    button: {
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      marginLeft: 20,
-      marginRight: 20,
-    }
-})
+  button: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 5,
+    backgroundColor: 'pink',
+    backgroundColor: '#FFFFFF',
+  },
+  back:{
+    color: '#000000',
+    fontSize: 25, 
+  }
+});
