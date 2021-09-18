@@ -9,9 +9,6 @@ import {youtubeArray} from './temp';
 import MenuItem from './MenuItem';
 import PlayVideo from './PlayVideo';
 
-
-
-
 function Menu({navigation}) {
   const [request, setRequest] = useState();
   const [youtubeResponse, setYouTubeResponse] = useState();

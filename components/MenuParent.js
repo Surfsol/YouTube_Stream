@@ -78,7 +78,7 @@ const MenuParent = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop:  0,
     alignItems: 'center',
     backgroundColor: '#fff',
   },
