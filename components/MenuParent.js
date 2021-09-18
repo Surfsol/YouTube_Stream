@@ -16,13 +16,14 @@ import {wp} from '../utils/dimensions';
 import {useDeviceOrientation} from '@react-native-community/hooks';
 
 
-const MenuParent = ({navigation}) => {
+const MenuParent = ({route,navigation}) => {
   const [youtubeResponse, setYouTubeResponse] = useState();
   const [video, setVideo] = useState();
   const {landscape} = useDeviceOrientation();
-
+  const { search } = route.params;
+console.log('on menu parent search', search)
     useEffect(() => {
-      getVideos().then(res => {
+      getVideos(search).then(res => {
         if (res === 'error') {
           Alert.alert(
             'Something went wrong with your request.',

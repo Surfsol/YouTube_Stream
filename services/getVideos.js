@@ -1,7 +1,8 @@
-const getVideos = async () => {
+const getVideos = async (search) => {
+  console.log('in get video', search)
     try {
       let response = await fetch(
-        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=direct%20tv&key=AIzaSyDpcrJuY4lCNTkWu5WuWaaMQC4n72zRVcA`,
+        `https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=${search}&key=AIzaSyDpcrJuY4lCNTkWu5WuWaaMQC4n72zRVcA`,
         {
           method: 'GET',
           headers: {

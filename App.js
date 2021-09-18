@@ -11,7 +11,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }}/>
-        <Stack.Screen name="Videos" component={MenuParent} options={{ title: 'Home' }}/>
+        <Stack.Screen name="Videos" component={MenuParent} options={{ title: 'Search' }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

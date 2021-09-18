@@ -13,7 +13,7 @@ const PlayVideo = ({videoId, clearVideo}) => {
     <View style={{flex: 1, width: wp(100)}}>
       <Pressable style={styles.button} onPress={clearVideo}>
         <BackArrow style={styles.arrow}/>
-         <Text style={styles.back}>Menu</Text>
+         <Text style={styles.back}>Videos</Text>
       </Pressable>
       <WebView
         style={{marginTop: 0}}
