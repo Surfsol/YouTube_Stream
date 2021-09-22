@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import {Button, StyleSheet, View, Text, TextInput} from 'react-native';
+import {Button, Colors, StyleSheet, View, Text, TextInput, NativeModules} from 'react-native';
 import {wp} from '../utils/dimensions';
+
+const {CustomNative}=NativeModules;
 
 function HomeScreen({navigation}) {
   const [search, setSearch] = useState();
@@ -12,6 +14,10 @@ function HomeScreen({navigation}) {
     setAdjustedSearch(adjustedSearch);
     setSearch(search);
   };
+
+  const kotlinMessage = () => {
+    CustomNative.Toastshow(`Searching for ${search}`, CustomNative.LONG);
+   }
 
   return (
     <View style={styles.container}>
@@ -25,8 +31,11 @@ function HomeScreen({navigation}) {
       />
       <Button
         title="Search"
-        onPress={() =>
+        onPress={() => {
+          kotlinMessage()
           navigation.navigate('Videos', {adjustedSearch: adjustedSearch})
+        }
+          
         }
       />
     </View>

@@ -8,11 +8,14 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  NativeModules
 } from 'react-native';
 import {getVideos} from '../services/getVideos';
 import PlayVideo from '../components/PlayVideo';
 import {wp} from '../utils/dimensions';
 import {useDeviceOrientation} from '@react-native-community/hooks';
+
+const {CustomNative}=NativeModules;
 
 const MenuParent = ({route, navigation}) => {
   const [youtubeResponse, setYouTubeResponse] = useState();
@@ -32,7 +35,7 @@ const MenuParent = ({route, navigation}) => {
       setYouTubeResponse(res.items);
     });
   }, []);
-
+    console.log({youtubeResponse})
   const clearVideo = () => {
     setVideo();
   };
@@ -41,7 +44,7 @@ const MenuParent = ({route, navigation}) => {
     return (
       <>
         <TouchableOpacity
-          onPress={() => setVideo(item.id.videoId)}
+          onPress={() => setVideo(item)}
           style={landscape ? styles.itemLand : styles.item}>
           <Image
             style={landscape ? styles.imageLand : styles.image}
@@ -71,11 +74,16 @@ const MenuParent = ({route, navigation}) => {
     );
   }
 
+  const kotlinMessage = () => {
+    CustomNative.Toastshow(`Loading: ${video.snippet.title}`, CustomNative.LONG);
+   }
+
   if (video) {
+    kotlinMessage()
     return (
       <View style={styles.container}>
         <PlayVideo
-          videoId={video}
+          videoId={video.id.videoId}
           clearVideo={clearVideo}
           navigation={navigation}
         />
