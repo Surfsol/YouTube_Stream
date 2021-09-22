@@ -1,5 +1,7 @@
 apply plugin: "com.android.application"
+apply plugin: 'kotlin-android' // added
 
+apply plugin: 'kotlin-android-extensions' // added
 import com.android.build.OutputFile
 
 /**
@@ -179,6 +181,7 @@ android {
 }
 
 dependencies {
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"  //added
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
