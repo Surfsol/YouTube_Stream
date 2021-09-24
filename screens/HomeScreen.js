@@ -8,9 +8,13 @@ function HomeScreen({navigation}) {
   const [search, setSearch] = useState();
   const [adjustedSearch, setAdjustedSearch] = useState();
 
+  const replaceWhitespace = (string) => {
+    const adjusted = string.replace(/\s/g, '%20')
+    return adjusted
+  }
+
   const saveSearch = search => {
-    let adjustedSearch = search;
-    adjustedSearch = adjustedSearch.replace(/\s/g, '%20');
+    const adjustedSearch = replaceWhitespace(search);
     setAdjustedSearch(adjustedSearch);
     setSearch(search);
   };

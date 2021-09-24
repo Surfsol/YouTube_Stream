@@ -35,7 +35,7 @@ const MenuParent = ({route, navigation}) => {
       setYouTubeResponse(res.items);
     });
   }, []);
-    console.log({youtubeResponse})
+
   const clearVideo = () => {
     setVideo();
   };
