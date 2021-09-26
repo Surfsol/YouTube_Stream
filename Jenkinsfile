@@ -5,7 +5,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                yarn 'test'
+                npx 'test'
             }
         }
     }
