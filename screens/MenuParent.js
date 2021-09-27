@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     backgroundColor: 'white',
     marginBottom: 15,
-    width: wp(94.9),
+    width: wp(95),
   },
   itemLand: {
     flex: 1,
