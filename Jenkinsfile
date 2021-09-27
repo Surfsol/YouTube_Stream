@@ -5,6 +5,7 @@ pipeline {
 
         stage('Test') {
             steps {
+                yarn 'test -- --updateSnapshot'
                 npx 'test'
             }
         }
