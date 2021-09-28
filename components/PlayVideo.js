@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, StyleSheet, Text} from 'react-native';
+import {Pressable, SafeAreaView, StyleSheet, Text} from 'react-native';
 import {View} from 'react-native';
 import {WebView} from 'react-native-webview';
 import {wp} from '../utils/dimensions';
@@ -8,19 +8,19 @@ import BackArrow from '../assets/BackArrow';
 const PlayVideo = ({videoId, clearVideo}) => {
   const uri = `https://www.youtube.com/watch?v=${videoId}`;
   return (
-    <View style={styles.container}>
-      <Pressable style={styles.backButton} onPress={clearVideo}>
-        <BackArrow style={styles.arrow} />
-        <Text style={styles.back}>Videos</Text>
-      </Pressable>
-      <WebView
-        style={styles.webView}
-        javaScriptEnabled={true}
-        domStorageEnabled={true}
-        allowsFullscreenVideo={true}
-        source={{uri: uri}}
-      />
-    </View>
+      <SafeAreaView style={styles.container}>
+        <Pressable style={styles.backButton} onPress={clearVideo}>
+          <BackArrow style={styles.arrow} />
+          <Text style={styles.back}>Videos</Text>
+        </Pressable>
+        <WebView
+          style={styles.webView}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          allowsFullscreenVideo={true}
+          source={{uri: uri}}
+        />
+    </SafeAreaView>
   );
 };
 
