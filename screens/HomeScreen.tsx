@@ -11,7 +11,11 @@ import {wp} from '../utils/dimensions';
 
 const {CustomNative} = NativeModules;
 
-function HomeScreen({navigation}) {
+interface HOMEProps {
+    navigation: ()=>void;
+}
+
+const HomeScreen: React.FC<HOMEProps> = ({navigation}) => {
   const [search, setSearch] = useState();
   const [adjustedSearch, setAdjustedSearch] = useState();
 
