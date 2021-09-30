@@ -14,6 +14,7 @@ import {getVideos} from '../services/getVideos';
 import PlayVideo from '../components/PlayVideo';
 import {wp} from '../utils/dimensions';
 import {useDeviceOrientation} from '@react-native-community/hooks';
+import { VideoSelectedModule } from '../utils/IosVideoSelectedModule';
 
 const {CustomNative}=NativeModules;
 
@@ -22,6 +23,7 @@ const MenuParent = ({route, navigation}) => {
   const [video, setVideo] = useState();
   const {landscape} = useDeviceOrientation();
   const {adjustedSearch} = route.params;
+  const [dateEvent, setDateEvent] = useState()
 
   useEffect(() => {
     getVideos(adjustedSearch).then(res => {
@@ -40,11 +42,31 @@ const MenuParent = ({route, navigation}) => {
     setVideo();
   };
 
+  const videoEventId = async(title) => {
+    try {
+      const eventId = await VideoSelectedModule.createVideoEvent(
+        title
+      );
+        setDateEvent(eventId)
+    } catch (e) {
+      Alert.alert(
+        'Error.',
+        'Please try again.',
+        [{cancelable: true}],
+      );
+    }
+  }
+
+  const videoHandle = (item) => {
+    setVideo(item)
+    videoEventId(item.snippet.title)
+  }
+
   const renderItem = ({item}) => {
     return (
       <>
         <TouchableOpacity
-          onPress={() => setVideo(item)}
+          onPress={() => videoHandle(item)}
           style={landscape ? styles.itemLand : styles.item}>
           <Image
             style={landscape ? styles.imageLand : styles.image}

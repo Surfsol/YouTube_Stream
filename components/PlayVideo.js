@@ -1,6 +1,5 @@
 import React from 'react';
 import {Pressable, SafeAreaView, StyleSheet, Text} from 'react-native';
-import {View} from 'react-native';
 import {WebView} from 'react-native-webview';
 import {wp} from '../utils/dimensions';
 import BackArrow from '../assets/BackArrow';
