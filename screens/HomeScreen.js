@@ -13,14 +13,14 @@ import {wp} from '../utils/dimensions';
 
 const {CustomNative} = NativeModules;
 
+export const replaceWhitespace = string => {
+  const adjusted = string.replace(/\s/g, '%20');
+  return adjusted;
+};
+
 function HomeScreen({navigation}) {
   const [search, setSearch] = useState();
   const [adjustedSearch, setAdjustedSearch] = useState();
-
-  const replaceWhitespace = string => {
-    const adjusted = string.replace(/\s/g, '%20');
-    return adjusted;
-  };
 
   const saveSearch = search => {
     const adjustedSearch = replaceWhitespace(search);
@@ -53,7 +53,7 @@ function HomeScreen({navigation}) {
   );
 }
 
-export default HomeScreen;
+export {HomeScreen};
 
 const styles = StyleSheet.create({
   container: {
